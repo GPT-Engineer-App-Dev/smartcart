@@ -1,19 +1,31 @@
-// Update this page (the content is just a fallback if you fail and example)
-// Use chakra-ui
-import { Container, Text, VStack } from "@chakra-ui/react";
+import { Box, Heading, Text, SimpleGrid, Image, Link } from "@chakra-ui/react";
+import { Link as RouterLink } from "react-router-dom";
 
-// Example of using react-icons
-// import { FaRocket } from "react-icons/fa";
-// <IconButton aria-label="Add" icon={<FaRocket />} size="lg" />; // IconButton would also have to be imported from chakra
+const sampleProducts = [
+  { id: 1, name: "Smartphone", price: "$299", image: "/images/smartphone.jpg" },
+  { id: 2, name: "Laptop", price: "$799", image: "/images/laptop.jpg" },
+  { id: 3, name: "Headphones", price: "$199", image: "/images/headphones.jpg" },
+];
 
 const Index = () => {
   return (
-    <Container centerContent maxW="container.md" height="100vh" display="flex" flexDirection="column" justifyContent="center" alignItems="center">
-      <VStack spacing={4}>
-        <Text fontSize="2xl">Your Blank Canvas</Text>
-        <Text>Chat with the agent to start making edits.</Text>
-      </VStack>
-    </Container>
+    <Box p={4}>
+      <Heading as="h1" mb={6}>Welcome to E-Shop</Heading>
+      <Text mb={6}>Your one-stop shop for the latest electronics.</Text>
+      <Heading as="h2" size="lg" mb={4}>Featured Products</Heading>
+      <SimpleGrid columns={[1, 2, 3]} spacing={10}>
+        {sampleProducts.map(product => (
+          <Box key={product.id} borderWidth="1px" borderRadius="lg" overflow="hidden">
+            <Image src={product.image} alt={product.name} />
+            <Box p={6}>
+              <Heading as="h3" size="md" mb={2}>{product.name}</Heading>
+              <Text mb={2}>{product.price}</Text>
+              <Link as={RouterLink} to={`/products/${product.id}`} color="teal.500">View Details</Link>
+            </Box>
+          </Box>
+        ))}
+      </SimpleGrid>
+    </Box>
   );
 };
 
